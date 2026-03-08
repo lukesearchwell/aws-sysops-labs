@@ -3,18 +3,20 @@
 This repository contains a series of hands-on labs focused on developing practical cloud engineering skills using Amazon Web Services (AWS).
 
 ### Repository Structure
-  aws-sysops-labs
-│
-├── ec2-iam-lab
-│   └── notes.md
-│
-└── README.md
 
+``` 
+  aws-sysops-labs
+ │
+ ├── ec2-iam-lab
+ │   └── notes.md
+ │
+ └── README.md
+```
 
 ## Lab Overview
 
 <details>
-  <summary> EC2 confif + IAM Roles </summary>
+  <summary> ### EC2 config + IAM Roles </summary>
 ### EC2 + IAM Role Lab
 This lab demonstrates secure service access from an EC2 instance using IAM roles.
 
