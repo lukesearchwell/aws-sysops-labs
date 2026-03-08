@@ -45,11 +45,10 @@ Notes:
 - Issue: IAM Role 'AmazonS3ReadOnlyAccess' includes "s3:list*" which meant that permissions to list all buckets and objects stored in the s3 bucket was granted. I detached the IAM policy and confirmed access denied for EC2 "sysops-lab-ec2-cli" when executing 'aws s3 ls' 
 
 # Lab Overview
-EC2 + IAM Role Lab
+## Objective: 
+Demonstrate secure access to AWS services from an EC2 instance using an IAM role and temporary credentials, avoiding the use of long-lived access keys on the instance.
 
-Objective: Demonstrate secure access to AWS services from an EC2 instance using an IAM role and temporary credentials, avoiding the use of long-lived access keys on the instance.
-
-Key concepts demonstrated:
+### Key concepts demonstrated:
 EC2 instance provisioning (Console and CLI)
 AMI discovery via AWS CLI
 IAM roles for EC2
@@ -58,41 +57,43 @@ Temporary credential issuance
 S3 access using role-based authentication
 Infrastructure lifecycle management
 
-Environment
-Region:eu-west-1
+### Environment
+Region: eu-west-1
 Instance type used: t3.micro
 
 Operating system: Amazon Linux 2023
 
 
-1.0 — EC2 Launch (Console)
+## 1.0 — EC2 Launch (Console)
 Instance created manually via AWS Console.
 
-Configuration:
+### Configuration:
 Instance Name: sysops-lab-ec2-console
 Instance Type: t3.micro
 Key Pair: sysops-lab-ec2-key
 Security Group: launch-wizard-1
 Public IPv4: Assigned automatically
 
-Verification:
+### Verification:
 Instance state confirmed running
 Status checks passed 2/2
 SSH connectivity verified
 
-Observation:
+### Observation:
 Public IPv4 was assigned automatically as the instance was launched in a subnet with Auto-assign public IP enabled.
 
 
-2.0 — AMI Discovery (CLI)
+## 2.0 — AMI Discovery (CLI)
 AMI was identified programmatically using the AWS CLI.
 
 Command:
+```
 aws ec2 describe-images --owners amazon \
 --filters "Name=name,Values=al2023-ami-*-x86_64" "Name=state,Values=available" \
 --query "Images[*].[ImageId,Name]" \
 --output table \
 --profile sysops-lab
+```
 
 Selected AMI:
 ami-008f3b045fbd24779
@@ -100,10 +101,11 @@ ami-008f3b045fbd24779
 Reasoning: Filtering ensures the instance uses an official Amazon Linux 2023 image that is currently available in the region.
 
 
-3.0 — EC2 Launch (CLI)
+## 3.0 — EC2 Launch (CLI)
 Instance launched via command line.
 
 Command used:
+```
 aws ec2 run-instances \
 --image-id ami-008f3b045fbd24779 \
 --count 1 \
@@ -113,20 +115,23 @@ aws ec2 run-instances \
 --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=sysops-lab-ec2-cli}]" \
 --profile sysops-lab \
 --region eu-west-1
+```
 
-Instance details:
+### Instance details:
 Instance Name: sysops-lab-ec2-cli
 Instance ID: i-0d5e1766e99478514
 Public IPv4: 54.216.104.38
 
 Verification command:
+
+```
 aws ec2 describe-instances \
 --filters "Name=tag:Name,Values=sysops-lab-ec2-cli" \
 --query "Reservations[*].Instances[*].[InstanceId,State.Name,PublicIpAddress]" \
 --output table
+```
 
-
-4.0 — IAM Role Configuration
+## 4.0 — IAM Role Configuration
 IAM role created:
 ec2-s3-read-role
 Initial policy attached:
@@ -136,9 +141,10 @@ Role attached to EC2 instance through:
 EC2 → Actions → Security → Modify IAM role
 
 
-5.0 — Instance Metadata Service (IMDSv2)
+## 5.0 — Instance Metadata Service (IMDSv2)
 IMDSv2 token retrieved:
 
+```
 TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" \
 -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
 
@@ -149,17 +155,18 @@ http://169.254.169.254/latest/meta-data/iam/security-credentials/
 Temporary credentials retrieved:
 curl -H "X-aws-ec2-metadata-token: $TOKEN" \
 http://169.254.169.254/latest/meta-data/iam/security-credentials/ec2-s3-read-role
+```
 
 Returned credentials included:
-AccessKeyId
-SecretAccessKey
-Session Token
-Expiration
+- AccessKeyId
+- SecretAccessKey
+- Session Token
+- Expiration
 
 These credentials are temporary and automatically rotated.
 
 
-6.0 — Role-Based Access Test
+## 6.0 — Role-Based Access Test
 Without configuring credentials on the instance aws s3 ls successfully listed S3 buckets.
 
 This confirms:
@@ -172,12 +179,16 @@ EC2 Instance
 No access keys were stored on the server.
 
 
-7.0 — Permission Removal Test
-The S3 policy was removed from the role.
+## 7.0 — Permission Removal Test
+The S3 policy was removed from the role applied to the EC2 instance.
 
 Expected behaviour: aws s3 ls resulted in AccessDenied. This demonstrates the difference between authentication of a role and actions the role is authorised to take.
 
 The instance could still obtain credentials but had no permissions to perform actions.
 
-8.0 — Teardown
-Instances terminated to prevent unnecessary cost. 
+## 8.0 — Teardown
+All resourced terminated and removed to prevent unnecessary cost. 
+- EC2 instances terminated
+- S3 Bucket emptied and deleted
+- IAM Role removed
+- Generated RSA key pairs removed
