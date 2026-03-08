@@ -17,10 +17,10 @@ This repository contains a series of hands-on labs focused on developing practic
 
 <details>
   <summary> ### EC2 config + IAM Roles </summary>
-### EC2 + IAM Role Lab
+EC2 + IAM Role Lab
 This lab demonstrates secure service access from an EC2 instance using IAM roles.
 
-#### Topics covered:
+Topics covered:
 Launching EC2 instance via AWS Console
 Launching EC2 instance via AWS CLI
 Amazon Machine Image (AMI) discovery
