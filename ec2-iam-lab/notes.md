@@ -24,3 +24,22 @@ Public IPv4: 54.216.104.38
 Region: eu-west-1
 
 Notes: EC2 Instance launched via Powershell. Confirmed instance state and config. Used "aws ec2-describe-images...--owners amazon" to choose the most up to date ami. Used filters to only show AMI's for Amazon Linux 2023 x86_64. EC2 deployment via CLI enables repeatable infrastructure as code deployments. When spinning up an individual instance, this workflow route may be more time consuming than using the Amazon console. 
+
+## IAM Role + IMDS Verification
+
+Role name returned from IMDS: ec2-s3-read-role
+
+Temporary credentials retrieved successfully from IMDSv2.
+Observed fields:
+- AccessKeyId
+- SecretAccessKey
+- Token
+- Expiration
+
+Notes:
+- IAM role applied to EC2 instance to allow read only access to s3 buckets.
+- No static credentials were configured on the EC2 instance.
+- `aws s3 ls` succeeded using temporary role-based credentials.
+- IMDSv2 token flow was required to query metadata manually.
+- Issue: Plain "curl" was not working so token request was required to get temporary credentials.
+- Issue: IAM Role 'AmazonS3ReadOnlyAccess' includes "s3:list*" which meant that permissions to list all buckets and objects stored in the s3 bucket was granted. I detached the IAM policy and confirmed access denied for EC2 "sysops-lab-ec2-cli" when executing 'aws s3 ls' 
