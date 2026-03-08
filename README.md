@@ -2,14 +2,16 @@
 
 This repository contains a series of hands-on labs focused on developing practical cloud engineering skills using Amazon Web Services (AWS).
 
-Repository Structure
+### Repository Structure
 <details>
+```
 aws-sysops-labs
 │
 ├── ec2-iam-lab
 │   └── notes.md
 │
 └── README.md
+```
 </details>
 
 ## Lab Overview
