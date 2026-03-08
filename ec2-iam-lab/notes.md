@@ -11,3 +11,16 @@ Subnet ID: subnet-035f8bad2719d3250
 Security Group: sg-009999c49ef929acf
 
 Notes: EC2 Instance. Configured within a DEFAULT VPC. Security Group configured to only allow connectioned from my IP address.
+
+## EC2 Launch – CLI
+
+Instance Name: sysops-lab-ec2-cli  
+Instance ID: i-0d5e1766e99478514  
+Instance Type: t3.micro  
+AMI ID: ami-008f3b045fbd24779  
+Key Pair: sysops-lab-ec2-key  
+Security Group: launch-wizard-1  
+Public IPv4: 54.216.104.38  
+Region: eu-west-1
+
+Notes: EC2 Instance launched via Powershell. Confirmed instance state and config. Used "aws ec2-describe-images...--owners amazon" to choose the most up to date ami. Used filters to only show AMI's for Amazon Linux 2023 x86_64. EC2 deployment via CLI enables repeatable infrastructure as code deployments. When spinning up an individual instance, this workflow route may be more time consuming than using the Amazon console. 
