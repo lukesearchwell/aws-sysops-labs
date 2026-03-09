@@ -1,4 +1,38 @@
 # AWS EC2 configuration IAM  Lab
+
+```mermaid
+flowchart TD
+    A[Admin Laptop<br/>PowerShell / AWS CLI / SSH] --> B[AWS Account<br/>eu-west-1]
+
+    subgraph B [AWS Account - eu-west-1]
+        subgraph VPC [VPC]
+            subgraph PUB [Public Subnet]
+                EC2[EC2 Instance<br/>sysops-lab-ec2-cli<br/>Amazon Linux 2023<br/>t3.micro]
+                SG[Security Group<br/>SSH from My IP]
+                KP[Key Pair<br/>sysops-lab-ec2-key]
+                IMDS[Instance Metadata Service<br/>IMDSv2<br/>169.254.169.254]
+            end
+
+            ROLE[IAM Role<br/>ec2-s3-read-role]
+            POLICY[Policy<br/>AmazonS3ReadOnlyAccess]
+        end
+
+        S3[Amazon S3 Bucket]
+    end
+
+    A -->|AWS Console| EC2
+    A -->|AWS CLI| EC2
+    A -->|SSH| EC2
+
+    EC2 --> SG
+    EC2 --> KP
+    EC2 -->|Assumes| ROLE
+    ROLE --> POLICY
+    EC2 -->|Token + credentials request| IMDS
+    IMDS -->|Temporary credentials| EC2
+    EC2 -->|aws s3 ls| S3
+```
+
 ## Objective: 
 Demonstrate secure access to AWS services from an EC2 instance using an IAM role and temporary credentials, avoiding the use of long-lived access keys on the instance.
 
