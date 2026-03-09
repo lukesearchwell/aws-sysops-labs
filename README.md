@@ -17,34 +17,34 @@
 
 ## Content Overview
 
-### EC2 + IAM Roles
-This lab demonstrates secure  access from an EC2 instance and implementation of IAM roles.
+### 1. EC2 + IAM Roles
+> This lab demonstrates secure  access from an EC2 instance and implementation of IAM roles.
 <details>
   <summary> Topics and Tools </summary>
 
-#### Topics covered:
-Launching EC2 instance via AWS Console
-Launching EC2 instance via AWS CLI
-Amazon Machine Image (AMI) discovery
-IAM role creation and attachment
-Instance Metadata Service (IMDSv2)
-Retrieval of temporary credentials
-S3 access using role-based authentication
-IAM permission testing 
-Infrastructure teardown
+  #### Topics covered:
+  Launching EC2 instance via AWS Console
+  Launching EC2 instance via AWS CLI
+  Amazon Machine Image (AMI) discovery
+  IAM role creation and attachment
+  Instance Metadata Service (IMDSv2)
+  Retrieval of temporary credentials
+  S3 access using role-based authentication
+  IAM permission testing 
+  Infrastructure teardown
 
-#### Tools Used
-- AWS CLI
-- Amazon EC2
-- AWS IAM
-- Amazon S3
-- Git
-- PowerShell
-- SSH
-</details>
+  #### Tools Used
+  - AWS CLI
+  - Amazon EC2
+  - AWS IAM
+  - Amazon S3
+  - Git
+  - PowerShell
+  - SSH
+  </details>
 
-### VPC Networking
-This lab demonstrates creation of a VPC.
+### 2. VPC Networking
+> This lab demonstrates cloud networking and creation of a VPC including specification of inbound and outbound rules.
 <details>
   <summary> Topics and Tools </summary>
 
