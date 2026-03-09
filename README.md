@@ -1,7 +1,5 @@
 # AWS SysOps Labs
 
-This repository contains a series of hands-on labs focused on developing practical cloud engineering skills using Amazon Web Services (AWS).
-
 ### Repository Structure
 
 ``` 
