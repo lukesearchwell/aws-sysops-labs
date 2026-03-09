@@ -9,18 +9,22 @@ This repository contains a series of hands-on labs focused on developing practic
  │
  ├── ec2-iam-lab
  │   └── notes.md
- │
+ |
+ ├── VPC-networking-lab
+ |   ├── architecture.md
+ |   └── notes.md
+ |
  └── README.md
 ```
 
-## Lab Overview
+## Content Overview
 
+### EC2 + IAM Roles
+This lab demonstrates secure  access from an EC2 instance and implementation of IAM roles.
 <details>
-  <summary> ### EC2 config + IAM Roles </summary>
-EC2 + IAM Role Lab
-This lab demonstrates secure service access from an EC2 instance using IAM roles.
+  <summary> Topics and Tools </summary>
 
-Topics covered:
+#### Topics covered:
 Launching EC2 instance via AWS Console
 Launching EC2 instance via AWS CLI
 Amazon Machine Image (AMI) discovery
@@ -39,4 +43,41 @@ Infrastructure teardown
 - Git
 - PowerShell
 - SSH
+</details>
+
+### VPC Networking
+This lab demonstrates creation of a VPC.
+<details>
+  <summary> Topics and Tools </summary>
+
+  #### Topics covered:
+  Custom VPC creation
+  CIDR block planning and subnet segmentation
+  Public vs private subnet architecture
+  Internet Gateway configuration
+  Route table creation and subnet association
+  Default route (0.0.0.0/0) configuration
+  Network connectivity troubleshooting
+  Route table misconfiguration debugging
+  Security Groups vs Network ACL behavioural differences
+  Stateful vs stateless firewall concepts
+  Inbound vs outbound traffic filtering
+  VPC Flow Logs configuration and analysis
+  Network traffic observation (ACCEPT vs REJECT)
+  Infrastructure teardown
+
+  #### Tools Used
+  - AWS CLI
+  - Amazon VPC
+  - Amazon EC2
+  - Internet Gateway
+  - Route Tables
+  - Security Groups
+  - Network ACLs
+  - VPC Flow Logs
+  - Amazon CloudWatch Logs
+  - Git
+  - PowerShell
+  - SSH
+
 </details>
