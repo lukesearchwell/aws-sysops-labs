@@ -1,21 +1,44 @@
+# Network Architecture
+
+
 ```mermaid
 
-architecture-beta
-    %% Groups
-    group 1 [AWS Region euwest1]
+    flowchart LR
+    
+    
+    
+    subgraph AWS [AWS Account - eu-west-1]
+        subgraph VPC [sysops-lab-vpc </br>10.0.0.0/16]
+            IGW[Internet Gateway] 
+            subgraph Public [Public Subnet 10.0.1.0/24]
+                EC2Bastion[EC2 Bastion <br/>]
+                PublicRoute[Public Route Table]
+                
+            end
+            subgraph Private [Private Subnet 10.0.2.0/24]
+                EC2App[EC2 App Instance]
+                PrivateRoute[Private Route Table]
+            end
+        end
+    end
+    
+    subgraph Admin [Admin]
+          
+    end
+   
+    Internet -->IGW
+    IGW -->PublicRoute
+    PublicRoute -->EC2Bastion
+    EC2Bastion-->|SSH|EC2App
+    Admin -->|SSH|EC2Bastion
+    EC2App -->PrivateRoute
+    
+    
+```
 
-    group VPC [SysOps Lab VPC] in 1
-    group Private(icon:aws:private-subnet) [Private Subnet] in VPC
-    group Public(icon:aws:public-subnet) [Public Subnet] in VPC
-    group edge(cloud) [Edge Services] in 1
-        
-    %%Services
-    service EC2 (icon:aws:res-amazon-ec2-instance) [EC2 App Instance] in Private
-    service EC2Bastion (icon:aws:res-amazon-ec2-instance) [EC2 Bastion Host] in Public
-    service Gateway (icon:aws:res-amazon-vpc-internet-gateway) [Internet Gateway] in edge
-    service Internet (icon:aws:res-globe) [Internet]
 
-    %%Links
-    Gateway:L -- R:EC2Bastion
-    EC2Bastion:L -- R:EC2
-    Internet:B -- T:Gateway
+## Route table
+|Route name | Routes |
+| --- | --- |
+| Public | local 10.0.0.0/16 </br> sysops-igw 0.0.0.0/0 |
+| Private | local 10.0.0.0/16 
