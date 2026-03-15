@@ -38,7 +38,8 @@
 
 
 ## Route table
-|Route name | Routes |
-| --- | --- |
-| Public | local 10.0.0.0/16 </br> sysops-igw 0.0.0.0/0 |
-| Private | local 10.0.0.0/16 
+|Subnet | Route type |Route |
+| --- | --- | --- |
+| Public | local | 10.0.0.0/16 
+| Public| sysops-igw | 0.0.0.0/0
+| Private | local |10.0.0.0/16 
