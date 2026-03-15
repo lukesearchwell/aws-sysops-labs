@@ -33,9 +33,16 @@ VPC ID: vpc-0457a6168fa286302
 ```
 
 ## 2.0 Subnets
-Subnets created within AWS CLI. I tried to break the script over multiple lines for better readability but bash would not recognise that the lines were part of the same script. 
+I created 2 subnets. </br>
+| Name | Address | subnet ID |
+| --- | --- | ---|
+| public subnet | 10.0.1.0/24 | subnet-0a7688acd2ab74bc3 |
+| private subnet | 10.0.2.0/24 | subnet-022f5de6391c437fc |
+
+Subnets created within AWS CLI. I tried to break the script over multiple lines for better readability but bash would not recognise that the lines were part of the same script.  
 
 
+### Formatting in Bash...
 This script format failed:
 ```
 aws ec2 create-subnet`
@@ -55,6 +62,7 @@ aws ec2 create-subnet\
  --cidr-block 10.0.x.0.24
 ```
 
+
 ## 3.0 Internet Gateway
 Gateway created and attached to sysops-lab-vpc via AWS Console.
 ```
@@ -73,3 +81,20 @@ The public route table was also assigned a 0.0.0.0/0 which allows traffic to <b>
 This route alone does not make a resource  internet-accessible; the instance must also have a public IP address (Elastic IP) and be confirgured with permissive security controls. Access will be further governed through Security Groups/Network ACLs.
 
 ## 5.0 EC2 Instances
+I created two EC2 instanced for this lab. 
+
+### EC2 Bastion
+This EC2 instance will be hosted in the <b> public </b> subnet.
+```
+name: sysops-ec2-bastion
+address:
+```
+
+</br>
+
+### EC2 App
+This EC2 instance will be hosted in the <b> private</b> subnet
+```
+name: sysops-ec2-app
+address:
+```
