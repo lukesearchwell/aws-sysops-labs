@@ -12,6 +12,10 @@
  |   ├── architecture.md
  |   └── notes.md
  |
+ ├── Load-balancing-autoscaling-lab
+ |   ├── architecture.md
+ |   └── notes.md
+ |
  └── README.md
 ```
 
@@ -38,7 +42,6 @@
   - Amazon EC2
   - AWS IAM
   - Amazon S3
-  - Git
   - PowerShell
   - SSH
   </details>
@@ -74,8 +77,42 @@
   - Network ACLs
   - VPC Flow Logs
   - Amazon CloudWatch Logs
-  - Git
-  - PowerShell
+   - PowerShell
   - SSH
 
+</details>
+
+### 3. Load Balancing and Autoscaling
+> This lab demonstrates dynamic/elastic load balancing for high availability solutions.
+<summary> Topics and Tools </summary>
+
+#### Topics covered:
+Application Load Balancer (ALB) creation
+Target Group configuration and registration
+Health check configuration and evaluation
+Listener configuration and traffic forwarding rules
+Multi-AZ subnet design for high availability
+Security Group configuration for ALB and EC2 instances
+Launch Template creation for EC2 configuration standardisation
+Auto Scaling Group (ASG) deployment and configuration
+Desired, minimum, and maximum capacity settings
+Automatic instance registration with Target Groups
+Instance health monitoring and replacement behaviour
+Scaling policy creation based on CloudWatch metrics
+CloudWatch CPU alarm configuration
+Traffic distribution across multiple instances
+Failure simulation and recovery validation
+Infrastructure teardown and rebuild
+
+#### Tools Used
+- AWS CLI
+- Amazon EC2
+- Application Load Balancer (ALB)
+- Target Groups
+- Auto Scaling Groups (ASG)
+- Launch Templates
+- Amazon CloudWatch
+- AWS IAM
+- PowerShell
+- SSH
 </details>
