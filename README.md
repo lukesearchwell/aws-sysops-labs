@@ -84,6 +84,7 @@
 
 ### 3. Load Balancing and Autoscaling
 > This lab demonstrates dynamic/elastic load balancing for high availability solutions.
+<details>
 <summary> Topics and Tools </summary>
 
 #### Topics covered:
