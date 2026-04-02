@@ -174,7 +174,7 @@ Both EC2 instances were launched using the same key pair (sysops-key-1). By forw
 
 ```
 ssh-add sysops-key-1.pem
-ssh-A -i .../sysops-key-1.pem ec2-user@34.242.224.252
+ssh -A -i .../sysops-key-1.pem ec2-user@34.242.224.252
 ```
 ##### Verify SSH key forwarding
 
@@ -189,6 +189,9 @@ I then established SSH connectivity to the EC2 App Instance.
 ssh ec2-user@10.0.2.81
 ```
 </br>
+I encountered another issue with configuring CloudWatch. After using "ssm-cli get-diagnostics", I was able to pinpoint the issue as the AWS Credentials check failed. 
+
+After correctly configuring CloudWatch, I am still unable to receive logs from my EC2 instances. I have checked security groups, route tables and IAM permissions. Fix to be added
 
 ## 7.0 Teardown
 
