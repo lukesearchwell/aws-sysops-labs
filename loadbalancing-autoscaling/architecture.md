@@ -8,31 +8,31 @@
     
     
     subgraph AWS [AWS Account - eu-west-1]
-        subgraph VPC [sysops-lab-vpc </br>10.0.0.0/16]
+        CASP[CloudWatch Alarm/Scaling Policy]
+            subgraph VPC [sysops-lab-vpc </br>10.0.0.0/16]
             IGW[Internet Gateway] 
-            subgraph Public [Public Subnet 10.0.1.0/24]
-                EC2Bastion[EC2 Bastion <br/>]
-                PublicRoute[Public Route Table]
-                
+                subgraph Public [Public Subnet AZ-a, AZ-b]
+                    ALB[Application Load Balancer]
+                    end
+                TG[Target Group]
+                subgraph Private [Private Subnet]
+                subgraph WA1 [EC2 Web/App 1 Private Subnet AZ-a]
+                    EC2App1[EC2 Web App]
+                    end
+                subgraph WA2 [EC2 Web/App 2 Private Subnet AZ-b]
+                    EC2App2[EC2 Web App]
+                    end
             end
-            subgraph Private [Private Subnet 10.0.2.0/24]
-                EC2App[EC2 App Instance]
-                PrivateRoute[Private Route Table]
+                ASG[Auto Scaling Group]
             end
-        end
-    end
-    
-    subgraph Admin [Admin]
-          
-    end
-   
-    Internet -->IGW
-    IGW -->PublicRoute
-    PublicRoute -->EC2Bastion
-    EC2Bastion-->|SSH|EC2App
-    Admin -->|SSH|EC2Bastion
-    EC2App -->PrivateRoute
-    
-    
-```
+    end     
 
+    Internet --> IGW
+    IGW --> Public
+    Public --> TG
+    TG --> WA1
+    TG --> WA2
+    WA1 --> ASG
+    WA2 --> ASG
+    ASG <--> CASP
+    
