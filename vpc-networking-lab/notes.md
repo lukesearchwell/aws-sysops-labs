@@ -191,7 +191,37 @@ ssh ec2-user@10.0.2.81
 </br>
 I encountered another issue with configuring CloudWatch. After using "ssm-cli get-diagnostics", I was able to pinpoint the issue as the AWS Credentials check failed. 
 
-After correctly configuring CloudWatch, I am still unable to receive logs from my EC2 instances. I have checked security groups, route tables and IAM permissions. Fix to be added
+After correctly configuring CloudWatch, I am still unable to receive logs from my EC2 instances. I have checked security groups, route tables and IAM permissions. 
+
+Issue fixed by allowing AWS to assign the IAM role to the <b>Flow Log</b>. Permission name is "VPCFlowLogs-CloudWatch-Policy..."
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:eu-west-1:774671065662:log-group:*:log-stream:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:DescribeLogStreams",
+                "logs:CreateLogGroup"
+            ],
+            "Resource": "arn:aws:logs:eu-west-1:774671065662:log-group:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "logs:DescribeLogGroups",
+            "Resource": "*"
+        }
+    ]
+}
+```
 
 ## 7.0 Teardown
 
