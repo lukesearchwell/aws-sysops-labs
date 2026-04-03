@@ -21,6 +21,7 @@
 
 ## Content Overview
 
+
 ### 1. EC2 + IAM Roles
 > This lab demonstrates secure  access from an EC2 instance and implementation of IAM roles.
 <details>
@@ -45,6 +46,7 @@
   - PowerShell
   - SSH
   </details>
+</br>
 
 ### 2. VPC Networking
 > This lab demonstrates cloud networking and creation of a VPC including specification of inbound and outbound rules.
@@ -81,9 +83,10 @@
   - SSH
 
 </details>
+</br>
 
 ### 3. Load Balancing and Autoscaling
-> This lab demonstrates dynamic/elastic load balancing for high availability solutions.
+> This lab demonstrates dynamic/elastic load balancing across multiple Availability Zones for delivery of high availability solutions.
 <details>
 <summary> Topics and Tools </summary>
 

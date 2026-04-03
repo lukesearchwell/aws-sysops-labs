@@ -44,28 +44,28 @@ Subnets created within AWS CLI. I tried to break the script over multiple lines 
 
 ### Formatting in Bash...
 This script format failed:
-```
-aws ec2 create-subnet`
->--vpc-id vpc-0457a6168fa286302'
->--cidr-block 10.0.x.0/24
+```shell
+aws ec2 'create-subnet'
+--vpc-id 'vpc-0457a6168fa286302'
+--cidr-block '10.0.x.0/24'
 ```
 
 This script format was successful:
-```
-aws ec2 create-subnet --vpc-id pc-0457a6168fa286302 --cidr-block 10.0.x.0.24
+```shell
+aws ec2 'create-subnet' --vpc-id 'pc-0457a6168fa286302' --cidr-block '10.0.x.0.24'
 ```
 
 In bash, I should use "\" to write scripts over multiple lines.
-```
-aws ec2 create-subnet\
- --vpi-id pc-0457a6168fa286302
- --cidr-block 10.0.x.0/24
+```shell
+aws ec2 'create-subnet'
+ --vpi-id 'pc-0457a6168fa286302'
+ --cidr-block '10.0.x.0/24'
 ```
 
 
 ## 3.0 Internet Gateway
 Gateway created and attached to sysops-lab-vpc via AWS Console.
-```
+```shell
 Name: sysops-lab-igw
 ```
 
@@ -95,21 +95,21 @@ Public address: 34.242.224.252 </br>
 Private address: 10.0.1.139
 
 #### CreateSecurityGroup
-```
-aws ec2 create-security-group 
+```shell
+aws ec2 'create-security-group' 
     --group-name 'sysops-bastion-sg' 
     --description 'sysops-bastion-sg created 2026-03-16T11:23:46.702Z' 
     --vpc-id 'vpc-0457a6168fa286302' 
 ```
 #### AuthorizeSecurityGroupIngress
-```
-aws ec2 authorize-security-group-ingress 
+```shell
+aws ec2 'authorize-security-group-ingress'
     --group-id 'sg-preview-1' 
-    --ip-permissions '{"IpProtocol":"tcp","FromPort":22,"ToPort":22,"IpRanges":[{"CidrIp":"86.135.8.143/32"}]}' 
+    --ip-permissions '{"IpProtocol":"tcp","FromPort":22,"ToPort":22,"IpRanges":[{"CidrIp":"MY IP ADDRESS"}]}' 
 ```
 #### RunInstances
-```
-aws ec2 run-instances 
+```shell
+aws ec2 'run-instances'
     --image-id 'ami-0d1b55a6d77a0c326' 
     --instance-type 't3.micro' 
     --key-name 'sysops-key-1' 
@@ -134,14 +134,14 @@ aws ec2 create-security-group
     --vpc-id 'vpc-0457a6168fa286302' 
 ```
 #### AuthorizeSecurityGroupIngress
-```
+```shell
 aws ec2 authorize-security-group-ingress 
     --group-id 'sg-preview-1' 
     --ip-permissions '{"IpProtocol":"tcp","FromPort":22,"ToPort":22,"UserIdGroupPairs":[{"GroupId":"sg-0905c371d80a3f7bb"}]}' 
 ```
 #### RunInstances
-```
-aws ec2 run-instances 
+```shell
+aws ec2 'run-instances' 
     --image-id 'ami-0d1b55a6d77a0c326' 
     --instance-type 't3.micro' 
     --key-name 'sysops-key-1' 
@@ -172,7 +172,7 @@ Both EC2 instances were launched using the same key pair (sysops-key-1). By forw
 
 #### Establish connectivity to Bastion (With agent forwarding)
 
-```
+```shell
 ssh-add sysops-key-1.pem
 ssh -A -i .../sysops-key-1.pem ec2-user@34.242.224.252
 ```
@@ -194,7 +194,7 @@ I encountered another issue with configuring CloudWatch. After using "ssm-cli ge
 After correctly configuring CloudWatch, I am still unable to receive logs from my EC2 instances. I have checked security groups, route tables and IAM permissions. 
 
 Issue fixed by allowing AWS to assign the IAM role to the <b>Flow Log</b>. Permission name is "VPCFlowLogs-CloudWatch-Policy..."
-```
+```shell
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -234,4 +234,4 @@ Deleted:
 - Internet Gateway
 - Security groups
 
-The `sysops-lab-vpc` was retained as the base network environment for future labs.
+The VPC `sysops-lab-vpc` was retained as the base network environment for future labs.
