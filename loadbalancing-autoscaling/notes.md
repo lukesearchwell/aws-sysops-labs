@@ -144,6 +144,8 @@ Instance scaling to occur based on CPU load. At 50-60% average CPU usage, a new 
 
 Cloudwatch was configured within the ASG settings, meaning separate configuration activity directly in Cloudwatch was unneeded.
 
+SNS Alerting was also configured here. Notifications successfully received for instance state changes at the registered email address.
+
 ## 6.0 Testing
 ### 6.1 CPU Load testing 
 To test the auto scaling capability, I used the following script on a live instance.
