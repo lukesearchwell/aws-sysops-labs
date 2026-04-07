@@ -36,5 +36,5 @@
     WA1 --> ASG
     WA2 --> ASG
     ASG <--> CASP
-    Internet --> NAT
-    NAT -.- Private
+    Internet <-.-> NAT
+    NAT <-.-> Private
