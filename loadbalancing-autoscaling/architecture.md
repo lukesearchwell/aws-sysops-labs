@@ -8,6 +8,7 @@
     
     
     subgraph AWS [AWS Account - eu-west-1]
+        NAT[NAT Gateway]
         CASP[CloudWatch Alarm/Scaling Policy]
             subgraph VPC [sysops-lab-vpc </br>10.0.0.0/16]
             IGW[Internet Gateway] 
@@ -26,7 +27,7 @@
                 ASG[Auto Scaling Group]
             end
     end     
-
+    
     Internet --> IGW
     IGW --> Public
     Public --> TG
@@ -35,4 +36,5 @@
     WA1 --> ASG
     WA2 --> ASG
     ASG <--> CASP
-    
+    Internet --> NAT
+    NAT -.- Private
