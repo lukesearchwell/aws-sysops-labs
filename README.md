@@ -16,7 +16,7 @@
  |   ├── architecture.md
  |   └── notes.md
  |
- ├── Load-balancing-autoscaling-lab
+ ├── dataresilience-backup-lab
  |   ├── architecture.md
  |   └── notes.md
  |
