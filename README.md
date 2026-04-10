@@ -16,6 +16,10 @@
  |   ├── architecture.md
  |   └── notes.md
  |
+ ├── Load-balancing-autoscaling-lab
+ |   ├── architecture.md
+ |   └── notes.md
+ |
  └── README.md
 ```
 
@@ -115,6 +119,37 @@ Infrastructure teardown and rebuild
 - Target Groups
 - Auto Scaling Groups (ASG)
 - Launch Templates
+- Amazon CloudWatch
+- AWS IAM
+- PowerShell
+- SSH
+</details>
+
+### 4. Data resilience and backup
+> This lab demonstrates dynamic/elastic load balancing across multiple Availability Zones for delivery of high availability solutions.
+<details>
+<summary> Topics and Tools </summary>
+
+#### Topics covered:
+RDS Multi-AZ deployment
+DB subnet group creation
+private database placement
+security group configuration for EC2-to-RDS access
+managed failover concepts
+automated backups vs manual snapshots
+EBS volume snapshot creation
+snapshot-based volume restore
+attaching restored storage to EC2
+recovery workflow validation
+
+#### Tools Used
+- AWS CLI
+- Amazon RDS
+- Amazon EC2
+- Amazon EBS
+- EBS Snapshots
+- DB Subnet Groups
+- Security Groups
 - Amazon CloudWatch
 - AWS IAM
 - PowerShell
