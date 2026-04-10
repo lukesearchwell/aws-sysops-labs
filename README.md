@@ -124,6 +124,7 @@ Infrastructure teardown and rebuild
 - PowerShell
 - SSH
 </details>
+</br>
 
 ### 4. Data resilience and backup
 > This lab demonstrates dynamic/elastic load balancing across multiple Availability Zones for delivery of high availability solutions.
