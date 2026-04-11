@@ -126,7 +126,7 @@ Infrastructure teardown and rebuild
 </details>
 </br>
 
-### 4. Data resilience and backup
+### 4. Data Resilience and Backup
 > This lab demonstrates dynamic/elastic load balancing across multiple Availability Zones for delivery of high availability solutions.
 <details>
 <summary> Topics and Tools </summary>
