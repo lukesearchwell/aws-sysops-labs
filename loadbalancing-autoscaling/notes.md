@@ -183,7 +183,9 @@ This test succeeded. I received responses from </br>
 - 10.0.1.124 (Instance was assigned to public subnet to allow connectivity to install nginx, hence unexpected ip address.)
 - 10.0.20.45
 
-This test also confirmed onwards 
+All infrastructure was retai 
+ned for ongoing labs.
+
 # 7.0 Troubleshooting and notes
 
 ## 7.1 SSH Forwarding
