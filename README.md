@@ -21,6 +21,13 @@
  |   └── notes.md
  |
  ├── ssm-lab
+ |   ├── architecture.md
+ │   └── notes.md
+ |
+ ├── terraform-vpc-lab
+ │   └── notes.md
+ |
+ ├── terraform-remote-backend-lab
  │   └── notes.md
  |
  └── README.md
@@ -28,13 +35,14 @@
 
 ## Content Overview
 
+### AWS
 
-### 1. EC2 + IAM Roles
+#### 1. EC2 + IAM Roles
 > This lab demonstrates secure  access from an EC2 instance and implementation of IAM roles.
 <details>
   <summary> Topics and Tools </summary>
 
-  #### Topics covered:
+  ##### Topics covered:
   Launching EC2 instance via AWS Console
   Launching EC2 instance via AWS CLI
   Amazon Machine Image (AMI) discovery
@@ -45,7 +53,7 @@
   IAM permission testing 
   Infrastructure teardown
 
-  #### Tools Used
+  ##### Tools Used
   - AWS CLI
   - Amazon EC2
   - AWS IAM
@@ -55,12 +63,12 @@
   </details>
 </br>
 
-### 2. VPC Networking
+#### 2. VPC Networking
 > This lab demonstrates cloud networking and creation of a VPC including specification of inbound and outbound rules.
 <details>
   <summary> Topics and Tools </summary>
 
-  #### Topics covered:
+  ##### Topics covered:
   Custom VPC creation
   CIDR block planning and subnet segmentation
   Public vs private subnet architecture
@@ -92,12 +100,12 @@
 </details>
 </br>
 
-### 3. Load Balancing and Autoscaling
+#### 3. Load Balancing and Autoscaling
 > This lab demonstrates dynamic/elastic load balancing across multiple Availability Zones for delivery of high availability solutions.
 <details>
 <summary> Topics and Tools </summary>
 
-#### Topics covered:
+##### Topics covered:
 Application Load Balancer (ALB) creation
 Target Group configuration and registration
 Health check configuration and evaluation
@@ -115,7 +123,7 @@ Traffic distribution across multiple instances
 Failure simulation and recovery validation
 Infrastructure teardown and rebuild
 
-#### Tools Used
+##### Tools Used
 - AWS CLI
 - Amazon EC2
 - Application Load Balancer (ALB)
@@ -129,12 +137,12 @@ Infrastructure teardown and rebuild
 </details>
 </br>
 
-### 4. Data Resilience and Backup
+#### 4. Data Resilience and Backup
 > This lab demonstrates dynamic/elastic load balancing across multiple Availability Zones for delivery of high availability solutions.
 <details>
 <summary> Topics and Tools </summary>
 
-#### Topics covered:
+##### Topics covered:
 RDS Multi-AZ deployment
 DB subnet group creation
 private database placement
@@ -146,7 +154,7 @@ snapshot-based volume restore
 attaching restored storage to EC2
 recovery workflow validation
 
-#### Tools Used
+##### Tools Used
 - AWS CLI
 - Amazon RDS
 - Amazon EC2
@@ -158,19 +166,19 @@ recovery workflow validation
 - AWS IAM
 - PowerShell
 - SSH
-</details>
+</details></br>
 
-### 5. Systems Manager (SSM)
+#### 5. Systems Manager (SSM)
 > This lab demonstrates implementation of AWS System Manager (SSM) which allows resources to be accessed via SSM, replacing SSH. SSM provides an agent-based approach to remote administration using IAM roles and outbound-only connectivity.
 <details>
  <summary> Topics and Tools </summary>
 
-  #### Topics covered:
+  ##### Topics covered:
   AWS SSM
 IAM role-based access for EC2 management
 SSM agent requirements and behaviour
 
-  #### Tools Used
+  ##### Tools Used
   - AWS CLI
   - Amazon EC2
   - AWS Systems Manager
@@ -178,3 +186,49 @@ SSM agent requirements and behaviour
   - PowerShell
     </details>
 </br>
+
+### Terraform
+Terraform code for this lab: https://github.com/lukesearchwell/terraform-aws-infra
+
+#### 6. Terraform VPC
+> This lab demonstrates the creation of a reusable Terraform module to provision a custom VPC. 
+<details>
+<summary> Topics and Tools </summary>
+
+##### Topics covered:
+Terraform modules (modules/vpc)
+VPC creation (CIDR allocation)
+Subnet design (public and private across AZs)
+Internet Gateway (IGW) configuration
+Route tables and associations
+
+##### Tools Used
+- Terraform
+- AWS CLI
+- Amazon VPC
+- Amazon EC2
+- PowerShell
+
+</details></br>
+
+#### 7. Terraform Remote Backend (S3 + DynamoDB Lock)
+> This lab demonstrates configuration of a Terraform backend using S3 for state storageand DynamoDB for state locking.
+<details>
+<summary> Topics and Tools </summary>
+
+##### Topics covered:
+Terraform backend configuration
+S3 bucket creation for state storage
+DynamoDB table creation for state locking
+State file structure and purpose
+Locking mechanism to prevent concurrent writes
+Basic security considerations (bucket access, encryption)
+
+##### Tools Used
+- Terrafirn
+- AWS CLI
+- Amazon S3
+- Amazon DynamoDB
+- PowerShell
+- SSH
+</details></br>
