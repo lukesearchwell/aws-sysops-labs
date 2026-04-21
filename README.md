@@ -20,6 +20,9 @@
  |   ├── architecture.md
  |   └── notes.md
  |
+ ├── ssm-lab
+ │   └── notes.md
+ |
  └── README.md
 ```
 
@@ -156,3 +159,22 @@ recovery workflow validation
 - PowerShell
 - SSH
 </details>
+
+### 5. Systems Manager (SSM)
+> This lab demonstrates implementation of AWS System Manager (SSM) which allows resources to be accessed via SSM, replacing SSH. SSM provides an agent-based approach to remote administration using IAM roles and outbound-only connectivity.
+<details>
+ <summary> Topics and Tools </summary>
+
+  #### Topics covered:
+  AWS SSM
+IAM role-based access for EC2 management
+SSM agent requirements and behaviour
+
+  #### Tools Used
+  - AWS CLI
+  - Amazon EC2
+  - AWS Systems Manager
+  - AWS IAM
+  - PowerShell
+    </details>
+</br>
