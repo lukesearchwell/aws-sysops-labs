@@ -1,4 +1,5 @@
 # AWS SysOps Labs
+![Terraform Repo](https://img.shields.io/badge/AWS_SysOps-Labs-purple)
 
 ### Repository Structure
 
