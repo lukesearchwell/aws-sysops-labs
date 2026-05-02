@@ -61,3 +61,25 @@ backend "s3" {
 
 }
 ```
+
+### 4. Terraform init and state checks
+I used terraform init, terraform plan, then terraform apply. Upon completion, I checked that s3 exists.
+
+### 5. Check configured state
+Removed .tfstate files using `Remove-Item terraform.tfstate` and `Remove-Item terraform.tfstate.backup` from local directory and re-applied `terraform plan`. 
+
+After re-applying terraform plan, and received:
+
+```
+No changes. Your infrastructure matches the configuration.
+```
+This confirms that terraform is no longer using the local .tfstate files for the terraform backend.
+
+
+### Troubleshooting
+Re-encountered a configuration issue in my local CLI when using terraform init. This issue with `aws configure sts-get-caller-identity. 
+
+Logged in using sso, however terraform would not use the authenticated sso profile.
+
+I used: `$env:AWS_PROFILE = "sysops-lab"` to define the aws profile that PowerShell would use. 
+
